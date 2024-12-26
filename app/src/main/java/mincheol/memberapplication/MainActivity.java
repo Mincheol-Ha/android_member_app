@@ -1,5 +1,6 @@
 package mincheol.memberapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -51,7 +52,21 @@ public class MainActivity extends AppCompatActivity {
                       registerUser();
                   }
               }
-      );  
+      );
+
+      // 회원조회 이벤트 처리
+      buttonUserlist.setOnClickListener(
+          new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  // UserListActivity를 뷰에 표시
+
+                  Intent intent = new Intent(MainActivity.this, UserlistAcivity.class);
+                  startActivity(intent);
+
+              }
+          }
+      );
       
     }
 
