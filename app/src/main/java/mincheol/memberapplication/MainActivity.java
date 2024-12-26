@@ -69,7 +69,13 @@ public class MainActivity extends AppCompatActivity {
             return; //여기서 중지
         }
 
-        // 중복 아이디 체크
+        // 중복 아이디 확인
+
+        if (databasehHelper.useridCheck(userid)) {
+            Toast.makeText(this, "이미 사용중인 아이디입니다.", Toast.LENGTH_SHORT).show();
+            return; //여기서 중지
+
+        }
 
 
         // 회원 저장
