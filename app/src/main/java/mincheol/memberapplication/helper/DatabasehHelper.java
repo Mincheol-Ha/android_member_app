@@ -23,7 +23,7 @@ public class DatabasehHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String SQL = "create table member (" +
-                "mno int primary key autoincrement,+ " +
+                "mno integer primary key autoincrement," +
                 "userid varchar(18) unique," +
                 "passwd varchar(18) not null," +
                 "name varchar(18) not null," +
