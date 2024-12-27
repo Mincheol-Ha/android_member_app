@@ -66,6 +66,7 @@ public class DatabasehHelper extends SQLiteOpenHelper {
 
 
     }
+
     //아이디 중복 확인
     public boolean useridCheck(String userid) {
 
@@ -95,6 +96,7 @@ public class DatabasehHelper extends SQLiteOpenHelper {
         List<String> userList = new ArrayList<>();
 
         // 쿼리 실행
+        //rawQuery(질의 문, 매개변수)
         Cursor cur = db.rawQuery(sql, null);
 
         // 결과집합(커서) 처리
@@ -121,4 +123,23 @@ public class DatabasehHelper extends SQLiteOpenHelper {
 
         return userList;
     }
+
+    // 로그인 확인
+    public boolean loginUser(String userid, String passwd) {
+        String sql = "select name from member where userid=? and passwd=?";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // 로그인 확인 질의문 작성
+        String[] params = new String[]{ userid, passwd };
+        Cursor cur = db.rawQuery(sql, params );
+
+        boolean isLoggedIn = cur.getCount() > 0;
+
+        cur.close();
+        db.close();
+
+        return isLoggedIn;
+
+    }
+
 }
