@@ -15,13 +15,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import mincheol.memberapplication.helper.DatabasehHelper;
+import mincheol.memberapplication.helper.MariaDBHelper;
 
 public class MainActivity extends AppCompatActivity {
 
     // 변수 선언
     private EditText editTextUserid, editTextPasswd, editTextName, editTextEmail;
     private Button buttonJoin, buttonUserlist;
-    private DatabasehHelper databasehHelper;
+  //  private DatabasehHelper databasehHelper;
+    private MariaDBHelper mariaDBHelper;
 
     // SharePreferences : 경량 데이터를 저장하기 위한 내부 객체
     // 데이터는 보통 키-값 형태로 앱의 내부 저장소에 저장
@@ -48,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
       
       // 데이터베이스 헬퍼 초기화
       // MODE_PRIVATE : 특정 앱만 접급 가능하도록 설정
-      databasehHelper = new DatabasehHelper(this);
+     // databasehHelper = new DatabasehHelper(this);
+        mariaDBHelper = new MariaDBHelper();
 
       // sharePreferences 초기화
         sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
@@ -105,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
         // 중복 아이디 확인
 
-        if (databasehHelper.useridCheck(userid)) {
+      //  if (databasehHelper.useridCheck(userid)) {
+        if (mariaDBHelper.useridCheck(userid)) {
             Toast.makeText(this, "이미 사용중인 아이디입니다.", Toast.LENGTH_SHORT).show();
             return; //여기서 중지
 
@@ -113,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         // 회원 저장
-        boolean success = databasehHelper.insertMember(userid, passwd, name, email);
+       // boolean success = databasehHelper.insertMember(userid, passwd, name, email);
+        boolean success = mariaDBHelper.insertMember(userid, passwd, name, email);
         if(success) {
             Toast.makeText(this, "✨회원 가입 성공!✨", Toast.LENGTH_SHORT).show();
         } else {
